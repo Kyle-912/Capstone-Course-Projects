@@ -1,0 +1,13 @@
+# Target labels
+ ELF2UF2Build
+# Source files and their labels
+/home/wsl/CEN3907/driver_lab/files/build/CMakeFiles/ELF2UF2Build
+/home/wsl/CEN3907/driver_lab/files/build/CMakeFiles/ELF2UF2Build.rule
+/home/wsl/CEN3907/driver_lab/files/build/CMakeFiles/ELF2UF2Build-complete.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-build.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-configure.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-download.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-install.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-mkdir.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-patch.rule
+/home/wsl/CEN3907/driver_lab/files/build/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-update.rule
