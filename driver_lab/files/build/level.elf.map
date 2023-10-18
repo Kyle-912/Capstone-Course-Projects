@@ -1221,9 +1221,9 @@ Discarded input sections
  .text.pio_sm_drain_tx_fifo
                 0x0000000000000000       0x40 CMakeFiles/level.dir/home/wsl/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .bss.claimed   0x0000000000000000        0x1 CMakeFiles/level.dir/home/wsl/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
- .text          0x0000000000000000        0x0 /tmp/ccJdmm6P.o
- .data          0x0000000000000000        0x0 /tmp/ccJdmm6P.o
- .bss           0x0000000000000000        0x0 /tmp/ccJdmm6P.o
+ .text          0x0000000000000000        0x0 /tmp/ccQjrL0k.o
+ .data          0x0000000000000000        0x0 /tmp/ccQjrL0k.o
+ .bss           0x0000000000000000        0x0 /tmp/ccQjrL0k.o
  .text          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a(functexcept.o)
  .data          0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a(functexcept.o)
  .bss           0x0000000000000000        0x0 /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a(functexcept.o)
@@ -5390,7 +5390,7 @@ LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nof
 .boot2          0x0000000010000000      0x100
                 0x0000000010000000                __boot2_start__ = .
  *(.boot2)
- .boot2         0x0000000010000000      0x100 /tmp/ccJdmm6P.o
+ .boot2         0x0000000010000000      0x100 /tmp/ccQjrL0k.o
                 0x0000000010000100                __boot2_end__ = .
                 0x0000000000000001                ASSERT (((__boot2_end__ - __boot2_start__) == 0x100), ERROR: Pico second stage bootloader must be 256 bytes in size)
 
@@ -7279,7 +7279,7 @@ LOAD CMakeFiles/level.dir/home/wsl/pico/pico-sdk/lib/tinyusb/src/common/tusb_fif
 LOAD CMakeFiles/level.dir/home/wsl/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
 LOAD CMakeFiles/level.dir/home/wsl/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
 LOAD CMakeFiles/level.dir/home/wsl/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
-LOAD /tmp/ccJdmm6P.o
+LOAD /tmp/ccQjrL0k.o
 LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a
 LOAD /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 START GROUP
@@ -7407,7 +7407,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000000000008ba       0x2c CMakeFiles/level.dir/home/wsl/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj
  .ARM.attributes
-                0x00000000000008e6       0x22 /tmp/ccJdmm6P.o
+                0x00000000000008e6       0x22 /tmp/ccQjrL0k.o
  .ARM.attributes
                 0x0000000000000908       0x2c /usr/lib/gcc/arm-none-eabi/10.3.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libstdc++.a(functexcept.o)
  .ARM.attributes
