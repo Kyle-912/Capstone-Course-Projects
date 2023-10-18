@@ -1,3 +1,0 @@
-/home/wsl/CEN3907/driver_lab/files/build/pioasm/CMakeFiles/pioasm.dir
-/home/wsl/CEN3907/driver_lab/files/build/pioasm/CMakeFiles/edit_cache.dir
-/home/wsl/CEN3907/driver_lab/files/build/pioasm/CMakeFiles/rebuild_cache.dir
