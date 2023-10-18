@@ -13,7 +13,7 @@ int main()
     matrix.init();
 
     while (1)
-    {
+    {//test
         matrix.clear_pixels();
 
         accel.update();
