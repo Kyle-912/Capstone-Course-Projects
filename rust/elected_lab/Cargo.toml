@@ -1,5 +1,5 @@
 [package]
-name = "feather-rp2040-blink"
+name = "elected_lab"
 version = "0.2.0"
 edition = "2021"
 
