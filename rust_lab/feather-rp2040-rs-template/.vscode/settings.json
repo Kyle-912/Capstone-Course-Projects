@@ -3,11 +3,15 @@
         "DPRAM",
         "NVIC",
         "REGS",
+        "SIMD",
+        "Tlink",
         "XOSC",
         "eabi",
         "nmagic",
         "plls",
         "rustc",
-        "thumbv"
+        "thumbv",
+        "vectorize",
+        "vectorizer"
     ]
 }
