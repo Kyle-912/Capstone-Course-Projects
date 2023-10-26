@@ -64,7 +64,7 @@ fn main() -> ! {
         &mut pac.RESETS,
         &mut watchdog,
     ).ok().unwrap();
-    
+
     // Setup USB
     let usb = unsafe {
         USB_BUS = Some(UsbBusAllocator::new(hal::usb::UsbBus::new(
