@@ -5,7 +5,9 @@
         "REGS",
         "XOSC",
         "eabi",
+        "nmagic",
         "plls",
+        "rustc",
         "thumbv"
     ]
 }
