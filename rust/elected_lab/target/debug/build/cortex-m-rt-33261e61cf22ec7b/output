@@ -1,3 +1,0 @@
-cargo:rustc-link-search=/home/wsl/CEN3907/rust/elected_lab/target/debug/build/cortex-m-rt-33261e61cf22ec7b/out
-cargo:rerun-if-changed=build.rs
-cargo:rerun-if-changed=link.x.in

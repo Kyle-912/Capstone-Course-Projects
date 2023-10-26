@@ -1,3 +1,0 @@
-cargo:rustc-link-search=/home/wsl/CEN3907/rust/elected_lab/target/debug/build/rp2040-pac-54fda72ee25a1f27/out
-cargo:rerun-if-changed=device.x
-cargo:rerun-if-changed=build.rs

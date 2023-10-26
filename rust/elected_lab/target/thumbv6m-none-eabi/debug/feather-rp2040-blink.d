@@ -1,1 +1,0 @@
-/home/wsl/CEN3907/rust_lab/feather-rp2040-rs-template/target/thumbv6m-none-eabi/debug/feather-rp2040-blink: /home/wsl/CEN3907/rust_lab/feather-rp2040-rs-template/src/main.rs /home/wsl/CEN3907/rust_lab/feather-rp2040-rs-template/src/usb_manager.rs
