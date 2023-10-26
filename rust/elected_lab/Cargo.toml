@@ -15,4 +15,4 @@ critical-section        = "1.1.2"
 embedded-hal            = "0.2.7"
 adafruit-feather-rp2040 = "0.7.0"
 rp2040-hal              = "0.9.0"
-ws2812-pio
+ws2812-pio              = ""
