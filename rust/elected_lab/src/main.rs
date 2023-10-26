@@ -10,16 +10,14 @@ use cortex_m_rt::entry;
 use embedded_hal::digital::v2::OutputPin;
 
 /***** board-specific imports *****/
-use adafruit_feather_rp2040::hal as hal;
+use adafruit_feather_rp2040::hal;
+use adafruit_feather_rp2040::{Pins, XOSC_CRYSTAL_FREQ};
 use hal::{
-    pac::interrupt,
     clocks::{init_clocks_and_plls, Clock},
     pac,
+    pac::interrupt,
     watchdog::Watchdog,
     Sio,
-};
-use adafruit_feather_rp2040::{
-    Pins, XOSC_CRYSTAL_FREQ,
 };
 
 // USB Device support
@@ -61,7 +59,9 @@ fn main() -> ! {
         pac.PLL_USB,
         &mut pac.RESETS,
         &mut watchdog,
-    ).ok().unwrap();
+    )
+    .ok()
+    .unwrap();
 
     // Setup USB
     let usb = unsafe {
@@ -94,7 +94,7 @@ fn main() -> ! {
     /*
     Loop Section
     */
-    let delay: u32 = 500;   // loop delay in ms
+    let delay: u32 = 500; // loop delay in ms
     let mut n: u32 = 0;
     loop {
         write!(usb, "starting loop number {:?}\r\n", n).unwrap();
@@ -104,5 +104,4 @@ fn main() -> ! {
         timer.delay_ms(delay as u32);
         n = n + 1;
     }
-
 }
