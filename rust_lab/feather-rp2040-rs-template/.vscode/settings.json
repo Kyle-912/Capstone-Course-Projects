@@ -4,6 +4,8 @@
         "NVIC",
         "REGS",
         "XOSC",
-        "plls"
+        "eabi",
+        "plls",
+        "thumbv"
     ]
 }
