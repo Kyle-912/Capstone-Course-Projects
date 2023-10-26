@@ -14,4 +14,4 @@ usb-device              = "0.2.9"
 critical-section        = "1.1.2"
 embedded-hal            = "0.2.7"
 adafruit-feather-rp2040 = "0.7.0"
-rp2040_hal
+rp2040-hal              = ""
