@@ -5,6 +5,8 @@
         "REGS",
         "XOSC",
         "blinky",
-        "plls"
+        "leds",
+        "plls",
+        "usbd"
     ]
 }
