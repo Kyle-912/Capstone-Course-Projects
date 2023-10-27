@@ -1,6 +1,7 @@
 {
     "cSpell.ignoreWords": [
         "DPRAM",
+        "NVIC",
         "REGS",
         "XOSC",
         "blinky",
