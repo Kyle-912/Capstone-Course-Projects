@@ -1,0 +1,12 @@
+{
+    "cSpell.ignoreWords": [
+        "DPRAM",
+        "NVIC",
+        "REGS",
+        "XOSC",
+        "blinky",
+        "leds",
+        "plls",
+        "usbd"
+    ]
+}
