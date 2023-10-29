@@ -16,14 +16,17 @@ use embedded_time::rate::*;
 
 /***** board-specific imports *****/
 use adafruit_feather_rp2040::hal as hal;
-use adafruit_feather_rp2040::{Pins, XOSC_CRYSTAL_FREQ};
-use hal::{
-    clocks::{init_clocks_and_plls, Clock},
-    pac,
-    pac::interrupt,
-    watchdog::Watchdog,
-    Sio,
+use adafruit_feather_rp2040::{
+    hal::{
+        clocks::{init_clocks_and_plls, Clock},
+        pac,
+        pac::interrupt,
+        watchdog::Watchdog,
+        Sio,
+    },
+    Pins, XOSC_CRYSTAL_FREQ
 };
+
 
 // USB Device support
 use usb_device::class_prelude::*;
