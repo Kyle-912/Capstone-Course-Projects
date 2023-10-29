@@ -19,4 +19,36 @@ impl MODE {
             descending: false,
         }
     }
+
+    pub fn clear(&mut self) {
+        for px in self.strip.iter_mut() {
+            *px = RGB8::new(0, 0, 0)
+        }
+    }
+
+    pub fn set(&mut self, color: RGB8) {
+        for px in self.strip.iter_mut() {
+            *px = color
+        }
+    }
+
+    pub fn to_list(&self) -> [RGB8; WIDTH*HEIGHT] {
+        self.strip
+    }
+
+    pub fn next(&mut self) {
+        if self.px_counter <= 10 {
+            self.descending = false;
+        } else if self.px_counter >= 200 {
+            self.descending = true;
+        }
+        if self.descending == true {
+            self.px_counter -= 1;
+        } else {
+            self.px_counter += 1;
+        }
+
+        
+    }
+
 }
