@@ -23,7 +23,7 @@ use adafruit_feather_rp2040::{
         // pac::interrupt,
         watchdog::Watchdog,
         Sio,
-        gpio::Function
+        gpio::{FunctionUart}
     },
     Pins, XOSC_CRYSTAL_FREQ,
 };
