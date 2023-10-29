@@ -5,6 +5,7 @@
         "REGS",
         "Uart",
         "XOSC",
+        "blinky",
         "leds",
         "plls",
         "usbd"

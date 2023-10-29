@@ -98,9 +98,9 @@ fn main() -> ! {
         USB_MANAGER.as_mut().unwrap()
     };
 
-    // initialize the Single Cycle IO
+    // Initialize the Single Cycle IO
     let sio = Sio::new(pac.SIO);
-    // initialize the pins to default state
+    // Initialize the pins to default state
     let pins = Pins::new(
         pac.IO_BANK0,
         pac.PADS_BANK0,
@@ -109,6 +109,12 @@ fn main() -> ! {
     );
 
     let mut timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+
+    // Setup the Propmaker Power Enable pin
+    let mut pwr_pin = pins.d10.into_push_pull_output();
+    pwr_pin.set_high().unwrap();
+
+    // Setup blinky LED pin
     let mut led_pin = pins.d13.into_push_pull_output();
 
     /*
