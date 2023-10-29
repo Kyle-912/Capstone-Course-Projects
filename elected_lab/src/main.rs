@@ -120,7 +120,7 @@ fn main() -> ! {
     );
 
     // Define modes
-    //TODO: include "let mut MODE"
+    //TODO: include "let mut MODE = MODE::new(RGB8::new(#, #, #));" for all 4 modes
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
