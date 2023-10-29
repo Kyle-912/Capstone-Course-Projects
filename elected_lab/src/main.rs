@@ -108,6 +108,17 @@ fn main() -> ! {
         &mut pac.RESETS,
     );
 
+    // Initialize pio
+    let timer = Timer::new(pac.TIMER, &mut pac.RESETS);
+    let (mut pio, sm0, _, _, _) = pac.PIO0.split(&mut pac.RESETS);
+    let mut neopixels = Ws2812::new(
+        pins.d5.into_mode(),
+        &mut pio,
+        sm0,
+        clocks.peripheral_clock.freq(),
+        timer.count_down(),
+    );
+
     let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     // Setup the Propmaker Power Enable pin
@@ -116,6 +127,8 @@ fn main() -> ! {
 
     // Setup blinky LED pin
     let mut led_pin = pins.d13.into_push_pull_output();
+
+
 
     /*
     Loop Section
