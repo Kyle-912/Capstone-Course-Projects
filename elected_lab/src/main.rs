@@ -8,34 +8,33 @@ use core::panic::PanicInfo;
 use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
-    digital::v2::{OutputPin, InputPin},
+    digital::v2::{InputPin, OutputPin},
     spi,
     timer::CountDown,
 };
 use embedded_time::rate::*;
 
 /***** board-specific imports *****/
-use adafruit_feather_rp2040::hal as hal;
+use adafruit_feather_rp2040::hal;
 use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
+        gpio::{FunctionI2C, FunctionSpi, FunctionUart},
         pac,
         pac::interrupt,
-        watchdog::Watchdog,
-        Sio,
-        gpio::{FunctionUart, FunctionSpi, FunctionI2C},
-        uart,
-        I2C,
         pio::PIOExt,
         timer::Timer,
+        uart,
+        watchdog::Watchdog,
+        Sio, I2C,
     },
     Pins, XOSC_CRYSTAL_FREQ,
 };
 
 /**** imports for external devices *****/
-use fugit::{RateExtU32, ExtU32};
+use fugit::{ExtU32, RateExtU32};
+use smart_leds::{SmartLedsWrite, RGB8};
 use ws2812_pio::Ws2812;
-use smart_leds::{RGB8, SmartLedsWrite};
 
 // USB Device support
 use usb_device::class_prelude::*;
@@ -127,7 +126,8 @@ fn main() -> ! {
     let mut pwr_pin = pins.d10.into_push_pull_output();
     pwr_pin.set_high().unwrap();
 
-    let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+    let mut delay_timer =
+        cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     let mut mode: u8 = 0; //TODO: will later be set by accel values
     let mut nticks: u8 = 5; // Loop delay is ms
@@ -167,5 +167,4 @@ fn main() -> ! {
         n = n + 1;
     }
     */
-
 }
