@@ -108,7 +108,7 @@ fn main() -> ! {
         &mut pac.RESETS,
     );
 
-    let mut timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+    let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
@@ -125,9 +125,9 @@ fn main() -> ! {
     loop {
         write!(usb, "starting loop number {:?}\r\n", n).unwrap();
         led_pin.set_low().unwrap();
-        timer.delay_ms(delay as u32);
+        delay_timer.delay_ms(delay as u32);
         led_pin.set_high().unwrap();
-        timer.delay_ms(delay as u32);
+        delay_timer.delay_ms(delay as u32);
         n = n + 1;
     }
 }
