@@ -62,7 +62,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{Pulse, Spiral}; //TODO: add other 2
+use animations::{Pulse, Snake}; //TODO: add other 2
 
 #[entry]
 fn main() -> ! {
@@ -121,7 +121,7 @@ fn main() -> ! {
 
     // Define modes TODO: add other 2
     let mut Pulse = Pulse::new(RGB8::new(50, 0, 50));
-    let mut Spiral = Spiral::new(RGB8::new(255, 0, 255));
+    let mut Snake = Snake::new(RGB8::new(255, 255, 255));
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
@@ -137,11 +137,11 @@ fn main() -> ! {
             write!(usb, "Updating display...\r\n").unwrap();
             nticks = 0;
             Pulse.next(); //TODO: add other 2
-            Spiral.next();
+            Snake.next();
 
             let ds: [RGB8; animations::NUM_PX] = match mode {
                 0 => Pulse.to_list(),
-                1 => Spiral.to_list(),
+                1 => Snake.to_list(),
                 // 2 => TODO:.to_list(),
                 // 3 => TODO:.to_list(),
                 _ => [RGB8::new(0, 0, 0); animations::NUM_PX],

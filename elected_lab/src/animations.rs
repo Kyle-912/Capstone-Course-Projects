@@ -52,7 +52,7 @@ impl Pulse {
     }
 }
 
-pub struct Spiral {
+pub struct Snake {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
     delta: bool,
@@ -60,8 +60,8 @@ pub struct Spiral {
     col: usize,
 }
 
-impl Spiral {
-    pub fn new(color: RGB8) -> Spiral {
+impl Snake {
+    pub fn new(color: RGB8) -> Snake {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
             color: color,
