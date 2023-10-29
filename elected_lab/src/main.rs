@@ -32,8 +32,10 @@ use adafruit_feather_rp2040::{
     Pins, XOSC_CRYSTAL_FREQ,
 };
 
-/**** imports *****/
-
+/**** imports for external devices *****/
+use fugit::{RateExtU32, ExtU32};
+use ws2812_pio::Ws2812;
+use smart_leds::{RGB8, SmartLedsWrite};
 
 // USB Device support
 use usb_device::class_prelude::*;
