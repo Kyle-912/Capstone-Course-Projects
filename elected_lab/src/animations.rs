@@ -1,10 +1,10 @@
 use smart_leds::RGB8;
 pub const WIDTH: usize = 8;
 pub const HEIGHT: usize = 8;
-pub const NUM_PX: usize = WIDTH*HEIGHT;
+pub const NUM_PX: usize = WIDTH * HEIGHT;
 
 pub struct Pulse {
-    strip: [RGB8; WIDTH*HEIGHT],
+    strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
     px_counter: u8,
     descending: bool,
@@ -13,7 +13,7 @@ pub struct Pulse {
 impl Pulse {
     pub fn new(color: RGB8) -> Pulse {
         Self {
-            strip: [RGB8::new(0, 0, 0); WIDTH*HEIGHT],
+            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
             color: color,
             px_counter: 0,
             descending: false,
@@ -32,7 +32,7 @@ impl Pulse {
         }
     }
 
-    pub fn to_list(&self) -> [RGB8; WIDTH*HEIGHT] {
+    pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
         self.strip
     }
 
@@ -53,7 +53,7 @@ impl Pulse {
 }
 
 pub struct Spiral {
-    strip: [RGB8; WIDTH*HEIGHT],
+    strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
     delta: bool,
     row: usize,
@@ -63,7 +63,7 @@ pub struct Spiral {
 impl Spiral {
     pub fn new(color: RGB8) -> Spiral {
         Self {
-            strip: [RGB8::new(0, 0, 0); WIDTH*HEIGHT],
+            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
             color: color,
             delta: true,
             row: 0,
@@ -73,11 +73,30 @@ impl Spiral {
 
     pub fn set(&mut self) {
         for (idx, px) in self.strip.iter_mut().enumerate() {
-            if idx == self.col*WIDTH + self.row {
+            if idx == self.col * WIDTH + self.row {
                 *px = self.color;
             } else {
-                
+                *px = RGB8::new(0, 0, 0);
             }
+        }
+    }
+
+    pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
+        self.strip
+    }
+
+    pub fn next(&mut self) {
+        if self.row == WIDTH - 1 {
+            self.delta = false;
+            self.col = (self.col + 1) % 8;
+        } else if self.row == 0 {
+            self.delta = true;
+            self.col = (self.col + 1) % 8;
+        }
+        if self.delta {
+            self.row += 1;
+        } else {
+            self.row -= 1;
         }
     }
 }
