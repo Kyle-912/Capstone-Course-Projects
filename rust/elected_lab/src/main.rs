@@ -24,6 +24,10 @@ use adafruit_feather_rp2040::{
         watchdog::Watchdog,
         Sio,
         gpio::{FunctionUart, FunctionSpi, FunctionI2C},
+        uart,
+        I2C,
+        pio::PIOExt,
+        timer::Timer,
     },
     Pins, XOSC_CRYSTAL_FREQ,
 };
