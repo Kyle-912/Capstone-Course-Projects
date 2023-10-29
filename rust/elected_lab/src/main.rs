@@ -8,7 +8,9 @@ use core::panic::PanicInfo;
 // use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
-    digital::v2::OutputPin
+    digital::v2::OutputPin,
+    spi,
+    timer::CountDown,
 };
 
 /***** board-specific imports *****/
