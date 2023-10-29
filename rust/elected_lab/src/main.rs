@@ -8,7 +8,8 @@ use core::panic::PanicInfo;
 // use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
-    digital::v2::OutputPin};
+    digital::v2::OutputPin
+};
 
 /***** board-specific imports *****/
 use adafruit_feather_rp2040::hal;
