@@ -15,7 +15,7 @@ use embedded_hal::{
 use embedded_time::rate::*;
 
 /***** board-specific imports *****/
-use adafruit_feather_rp2040::hal;
+use adafruit_feather_rp2040::{hal, pac::I2C1};
 use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
@@ -32,7 +32,8 @@ use adafruit_feather_rp2040::{
 };
 
 /**** imports for external devices *****/
-use fugit::{ExtU32, RateExtU32};
+// use fugit::{ExtU32, RateExtU32};
+use lis3dh::{Lis3dh, Lis3dhI2C};
 use smart_leds::{SmartLedsWrite, RGB8};
 use ws2812_pio::Ws2812;
 
@@ -121,6 +122,23 @@ fn main() -> ! {
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
     pwr_pin.set_high().unwrap();
+
+    // Initialize I2C
+    let i2c_sda = pins.sda.into_mode();
+    let i2c_scl = pins.scl.into_mode();
+    let i2c = I2C::i2c1(
+        pac.I2C1,
+        i2c_sda,
+        i2c_scl,
+        400000,
+        &mut pac.RESETS,
+        &pac.CLOCKS,
+    );
+
+    // Initialize the LIS3DH accelerometer
+    let mut lis3dh = Lis3dhI2C::new(i2c, 0x18); // Adjust the I2C address if necessary
+    lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
+    lis3dh.set_odr(lis3dh::DataRate::Hz_10).unwrap();
 
     let mut delay_timer =
         cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
