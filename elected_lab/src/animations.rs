@@ -51,3 +51,23 @@ impl Pulse {
         self.set(RGB8::new(self.px_counter, 0, self.px_counter + 10u8));
     }
 }
+
+pub struct Spiral {
+    strip: [RGB8; WIDTH*HEIGHT],
+    color: RGB8,
+    delta: bool,
+    row: usize,
+    col: usize,
+}
+
+impl Spiral {
+    pub fn new(color: RGB8) -> Spiral {
+        Self {
+            strip: [RGB8::new(0, 0, 0); WIDTH*HEIGHT],
+            color: color,
+            delta: true,
+            row: 0,
+            col: 0,
+        }
+    }
+}

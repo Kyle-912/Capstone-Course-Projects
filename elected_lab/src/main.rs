@@ -62,7 +62,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{Pulse, };
+use animations::{Pulse, }; //TODO: add other 3
 
 #[entry]
 fn main() -> ! {
