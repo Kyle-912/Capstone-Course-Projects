@@ -70,4 +70,14 @@ impl Spiral {
             col: 0,
         }
     }
+
+    pub fn set(&mut self) {
+        for (idx, px) in self.strip.iter_mut().enumerate() {
+            if idx == self.col*WIDTH + self.row {
+                *px = self.color;
+            } else {
+                
+            }
+        }
+    }
 }
