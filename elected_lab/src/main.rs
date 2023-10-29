@@ -127,8 +127,6 @@ fn main() -> ! {
     let mut pwr_pin = pins.d10.into_push_pull_output();
     pwr_pin.set_high().unwrap();
 
-    let mut blinky_led_pin = pins.d13.into_push_pull_output();
-
     let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     let mut mode: u8 = 0; //TODO: will later be set by accel values
@@ -137,12 +135,28 @@ fn main() -> ! {
     loop {
         if nticks > 4 {
             write!(usb, "Updating display...\r\n").unwrap();
+            nticks = 0;
+            Pulse.next(); //TODO: add other 2
+            Spiral.next();
+
+            let ds: [RGB8; animations::NUM_PX] = match mode {
+                0 => Pulse.to_list(),
+                1 => Spiral.to_list(),
+                // 2 => TODO:.to_list(),
+                // 3 => TODO:.to_list(),
+                _ => [RGB8::new(0, 0, 0); animations::NUM_PX],
+            };
+
+            neopixels.write(ds.iter().cloned()).unwrap();
         }
+        nticks += 1;
+        delay_timer.delay_ms(5 as u32);
     }
 
     /*
     // Old Loop Section
-        let delay: u32 = 500; // loop delay in ms
+    let mut blinky_led_pin = pins.d13.into_push_pull_output();
+    let delay: u32 = 500; // loop delay in ms
     let mut n: u32 = 0;
     loop {
         write!(usb, "starting loop number {:?}\r\n", n).unwrap();
