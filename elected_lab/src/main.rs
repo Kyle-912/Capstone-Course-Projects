@@ -3,9 +3,9 @@
 
 /**** low-level imports *****/
 use core::fmt::Write;
-// use core::panic::PanicInfo;
-use panic_halt as _;
-// use cortex_m::prelude::*;
+use core::panic::PanicInfo;
+// use panic_halt as _;
+use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
     digital::v2::{OutputPin, InputPin},
@@ -20,7 +20,7 @@ use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
         pac,
-        // pac::interrupt,
+        pac::interrupt,
         watchdog::Watchdog,
         Sio,
         gpio::{FunctionUart, FunctionSpi, FunctionI2C},
