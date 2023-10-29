@@ -5,7 +5,7 @@ pub const NUM_PX: usize = WIDTH * HEIGHT;
 
 pub struct Pulse {
     strip: [RGB8; WIDTH * HEIGHT],
-    color: RGB8,
+    // color: RGB8,
     px_counter: u8,
     descending: bool,
 }
@@ -13,18 +13,18 @@ pub struct Pulse {
 impl Pulse {
     pub fn new(color: RGB8) -> Pulse {
         Self {
-            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
-            color: color,
+            strip: [color; WIDTH * HEIGHT],
+            // color: color,
             px_counter: 0,
             descending: false,
         }
     }
 
-    pub fn clear(&mut self) {
-        for px in self.strip.iter_mut() {
-            *px = RGB8::new(0, 0, 0);
-        }
-    }
+    // pub fn clear(&mut self) {
+    //     for px in self.strip.iter_mut() {
+    //         *px = RGB8::new(0, 0, 0);
+    //     }
+    // }
 
     pub fn set(&mut self, color: RGB8) {
         for px in self.strip.iter_mut() {
