@@ -22,13 +22,13 @@ impl MODE {
 
     pub fn clear(&mut self) {
         for px in self.strip.iter_mut() {
-            *px = RGB8::new(0, 0, 0)
+            *px = RGB8::new(0, 0, 0);
         }
     }
 
     pub fn set(&mut self, color: RGB8) {
         for px in self.strip.iter_mut() {
-            *px = color
+            *px = color;
         }
     }
 
@@ -48,7 +48,6 @@ impl MODE {
             self.px_counter += 1;
         }
 
-        
+        self.set(RGB8::new(self.px_counter, 0, self.px_counter + 10u8));
     }
-
 }
