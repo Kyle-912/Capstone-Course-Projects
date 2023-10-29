@@ -3,12 +3,12 @@
         "DPRAM",
         "NVIC",
         "REGS",
-        "Uart",
         "XOSC",
         "blinky",
         "leds",
         "nticks",
         "plls",
+        "uart",
         "usbd"
     ]
 }
