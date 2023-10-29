@@ -62,7 +62,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{};
+use animations::{MODE, };
 
 #[entry]
 fn main() -> ! {
@@ -120,7 +120,7 @@ fn main() -> ! {
     );
 
     // Define modes
-    //TODO: include "let mut MODE = MODE::new(RGB8::new(#, #, #));" for all 4 modes
+    let mut MODE = MODE::new(RGB8::new(50, 0, 50));
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
