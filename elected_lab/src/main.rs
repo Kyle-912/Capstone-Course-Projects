@@ -35,6 +35,7 @@ use adafruit_feather_rp2040::{
 use fugit::{ExtU32, RateExtU32};
 use smart_leds::{SmartLedsWrite, RGB8};
 use ws2812_pio::Ws2812;
+use lis3dh::{Lis3dh, Lis3dhI2C};
 
 // USB Device support
 use usb_device::class_prelude::*;
