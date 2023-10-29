@@ -131,10 +131,18 @@ fn main() -> ! {
 
     let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
+    let mut mode: u8 = 0; //TODO: will later be set by accel values
+    let mut nticks: u8 = 5; // Loop delay is ms
+
+    loop {
+        if nticks > 4 {
+            write!(usb, "Updating display...\r\n").unwrap();
+        }
+    }
+
     /*
-    Loop Section
-    */
-    let delay: u32 = 500; // loop delay in ms
+    // Old Loop Section
+        let delay: u32 = 500; // loop delay in ms
     let mut n: u32 = 0;
     loop {
         write!(usb, "starting loop number {:?}\r\n", n).unwrap();
@@ -144,4 +152,6 @@ fn main() -> ! {
         delay_timer.delay_ms(delay as u32);
         n = n + 1;
     }
+    */
+
 }
