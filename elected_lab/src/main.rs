@@ -5,7 +5,7 @@
 use core::fmt::Write;
 // use core::panic::PanicInfo;
 use panic_halt as _;
-use cortex_m::prelude::*;
+// use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
     digital::v2::{OutputPin, InputPin},
@@ -32,7 +32,6 @@ use adafruit_feather_rp2040::{
     Pins, XOSC_CRYSTAL_FREQ,
 };
 
-
 // USB Device support
 use usb_device::class_prelude::*;
 // USB Communications Class Device support
@@ -42,20 +41,20 @@ use usb_manager::UsbManager;
 static mut USB_BUS: Option<UsbBusAllocator<hal::usb::UsbBus>> = None;
 static mut USB_MANAGER: Option<UsbManager> = None;
 #[allow(non_snake_case)]
-// #[interrupt]
-// unsafe fn USBCTRL_IRQ() {
-//     match USB_MANAGER.as_mut() {
-//         Some(manager) => manager.interrupt(),
-//         None => (),
-//     };
-// }
-// #[panic_handler]
-// fn panic(panic_info: &PanicInfo) -> ! {
-//     if let Some(usb) = unsafe { USB_MANAGER.as_mut() } {
-//         writeln!(usb, "{}", panic_info).ok();
-//     }
-//     loop {}
-// }
+#[interrupt]
+unsafe fn USBCTRL_IRQ() {
+    match USB_MANAGER.as_mut() {
+        Some(manager) => manager.interrupt(),
+        None => (),
+    };
+}
+#[panic_handler]
+fn panic(panic_info: &PanicInfo) -> ! {
+    if let Some(usb) = unsafe { USB_MANAGER.as_mut() } {
+        writeln!(usb, "{}", panic_info).ok();
+    }
+    loop {}
+}
 
 #[entry]
 fn main() -> ! {
