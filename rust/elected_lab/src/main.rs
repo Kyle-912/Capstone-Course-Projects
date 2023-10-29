@@ -20,7 +20,7 @@ use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
         pac,
-        pac::interrupt,
+        // pac::interrupt,
         watchdog::Watchdog,
         Sio,
     },
@@ -37,20 +37,20 @@ use usb_manager::UsbManager;
 static mut USB_BUS: Option<UsbBusAllocator<hal::usb::UsbBus>> = None;
 static mut USB_MANAGER: Option<UsbManager> = None;
 #[allow(non_snake_case)]
-#[interrupt]
-unsafe fn USBCTRL_IRQ() {
-    match USB_MANAGER.as_mut() {
-        Some(manager) => manager.interrupt(),
-        None => (),
-    };
-}
-#[panic_handler]
-fn panic(panic_info: &PanicInfo) -> ! {
-    if let Some(usb) = unsafe { USB_MANAGER.as_mut() } {
-        writeln!(usb, "{}", panic_info).ok();
-    }
-    loop {}
-}
+// #[interrupt]
+// unsafe fn USBCTRL_IRQ() {
+//     match USB_MANAGER.as_mut() {
+//         Some(manager) => manager.interrupt(),
+//         None => (),
+//     };
+// }
+// #[panic_handler]
+// fn panic(panic_info: &PanicInfo) -> ! {
+//     if let Some(usb) = unsafe { USB_MANAGER.as_mut() } {
+//         writeln!(usb, "{}", panic_info).ok();
+//     }
+//     loop {}
+// }
 
 #[entry]
 fn main() -> ! {
