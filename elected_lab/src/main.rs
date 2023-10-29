@@ -119,16 +119,16 @@ fn main() -> ! {
         timer.count_down(),
     );
 
-    let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+    // Define modes
+    //TODO: include "let mut MODE"
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
     pwr_pin.set_high().unwrap();
 
-    // Setup blinky LED pin
-    let mut led_pin = pins.d13.into_push_pull_output();
+    let mut blinky_led_pin = pins.d13.into_push_pull_output();
 
-
+    let mut delay_timer = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     /*
     Loop Section
@@ -137,9 +137,9 @@ fn main() -> ! {
     let mut n: u32 = 0;
     loop {
         write!(usb, "starting loop number {:?}\r\n", n).unwrap();
-        led_pin.set_low().unwrap();
+        blinky_led_pin.set_low().unwrap();
         delay_timer.delay_ms(delay as u32);
-        led_pin.set_high().unwrap();
+        blinky_led_pin.set_high().unwrap();
         delay_timer.delay_ms(delay as u32);
         n = n + 1;
     }
