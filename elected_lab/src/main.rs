@@ -118,16 +118,16 @@ fn main() -> ! {
         timer.count_down(),
     );
 
-    // Define modes TODO: add other 2
-    let mut pulse = Pulse::new(RGB8::new(50, 0, 50));
-    let mut snake = Snake::new(RGB8::new(255, 255, 255));
-
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
     pwr_pin.set_high().unwrap();
 
     let mut delay_timer =
         cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+
+    // Define modes TODO: add other 2
+    let mut pulse = Pulse::new(RGB8::new(50, 0, 50));
+    let mut snake = Snake::new(RGB8::new(255, 255, 255));
 
     let mut mode: u8 = 0; //TODO: will later be set by accel values
     let mut nticks: u8 = 5; // Loop delay is ms
