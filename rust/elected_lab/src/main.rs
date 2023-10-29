@@ -4,8 +4,8 @@
 /**** low-level imports *****/
 use core::fmt::Write;
 use core::panic::PanicInfo;
-// use panic_halt as _;
-// use cortex_m::prelude::*;
+use panic_halt as _;
+use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
     digital::v2::{InputPin, OutputPin},
