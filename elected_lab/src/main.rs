@@ -61,6 +61,9 @@ fn panic(panic_info: &PanicInfo) -> ! {
     loop {}
 }
 
+mod animations;
+use animations::{};
+
 #[entry]
 fn main() -> ! {
     // Grab the singleton objects
