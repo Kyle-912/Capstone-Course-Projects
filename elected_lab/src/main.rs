@@ -62,7 +62,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{Pulse, }; //TODO: add other 3
+use animations::{Pulse, Spiral}; //TODO: add other 2
 
 #[entry]
 fn main() -> ! {
@@ -119,8 +119,9 @@ fn main() -> ! {
         timer.count_down(),
     );
 
-    // Define modes
+    // Define modes TODO: add other 2
     let mut Pulse = Pulse::new(RGB8::new(50, 0, 50));
+    let mut Spiral = Spiral::new(RGB8::new(255, 0, 255));
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();

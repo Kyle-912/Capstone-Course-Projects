@@ -98,5 +98,6 @@ impl Spiral {
         } else {
             self.row -= 1;
         }
+        self.set();
     }
 }
