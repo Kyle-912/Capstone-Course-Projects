@@ -12,7 +12,7 @@ use embedded_hal::{
     spi,
     timer::CountDown,
 };
-
+use embedded_time::rate::*;
 
 /***** board-specific imports *****/
 use adafruit_feather_rp2040::hal;
