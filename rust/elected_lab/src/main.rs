@@ -24,7 +24,7 @@ use adafruit_feather_rp2040::{
         watchdog::Watchdog,
         Sio,
     },
-    Pins, XOSC_CRYSTAL_FREQ
+    Pins, XOSC_CRYSTAL_FREQ,
 };
 
 
