@@ -15,7 +15,7 @@ use embedded_hal::{
 use embedded_time::rate::*;
 
 /***** board-specific imports *****/
-use adafruit_feather_rp2040::hal;
+use adafruit_feather_rp2040::hal as hal;
 use adafruit_feather_rp2040::{Pins, XOSC_CRYSTAL_FREQ};
 use hal::{
     clocks::{init_clocks_and_plls, Clock},
