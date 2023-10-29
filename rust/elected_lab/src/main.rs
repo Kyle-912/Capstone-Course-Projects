@@ -8,7 +8,7 @@ use panic_halt as _;
 use cortex_m::prelude::*;
 use cortex_m_rt::entry;
 use embedded_hal::{
-    digital::v2::{InputPin, OutputPin},
+    digital::v2::{OutputPin},
     spi,
     timer::CountDown,
 };
