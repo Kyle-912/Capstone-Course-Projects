@@ -3,15 +3,15 @@ pub const WIDTH: usize = 8;
 pub const HEIGHT: usize = 8;
 pub const NUM_PX: usize = WIDTH*HEIGHT;
 
-pub struct MODE {
+pub struct Pulse {
     strip: [RGB8; WIDTH*HEIGHT],
     color: RGB8,
     px_counter: u8,
     descending: bool,
 }
 
-impl MODE {
-    pub fn new(color: RGB8) -> MODE {
+impl Pulse {
+    pub fn new(color: RGB8) -> Pulse {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH*HEIGHT],
             color: color,
