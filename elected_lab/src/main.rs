@@ -4,19 +4,21 @@
 /**** low-level imports *****/
 use core::fmt::Write as SerialWrite;
 use core::panic::PanicInfo;
+use adafruit_feather_rp2040::hal::gpio::I2C;
+use adafruit_feather_rp2040::pac::I2C1;
 // use panic_halt as _;
 use cortex_m::prelude::*;
 use cortex_m_rt::entry;
+use embedded_hal::blocking::i2c::{Read, Write, self};
 use embedded_hal::{
     digital::v2::{InputPin, OutputPin},
     spi,
     timer::CountDown,
 };
 use embedded_time::rate::*;
-use embedded_hal::blocking::i2c::{Read, Write};
 
 /***** board-specific imports *****/
-use adafruit_feather_rp2040::hal;
+use adafruit_feather_rp2040::hal::{self, i2c};
 use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
@@ -34,9 +36,9 @@ use adafruit_feather_rp2040::{
 
 /**** imports for external devices *****/
 use fugit::{ExtU32, RateExtU32};
+use lis3dh::{Lis3dh, Lis3dhI2C};
 use smart_leds::{SmartLedsWrite, RGB8};
 use ws2812_pio::Ws2812;
-use lis3dh::{Lis3dh, Lis3dhI2C};
 
 // USB Device support
 use usb_device::class_prelude::*;
@@ -123,21 +125,20 @@ fn main() -> ! {
     // Initialize I2C
     let i2c_sda = pins.sda.into_mode();
     let i2c_scl = pins.scl.into_mode();
-    let mut i2c = I2C::i2c1(
-        pac.I2C1,
-        i2c_sda,
-        i2c_scl,
-        400_000,
-        &mut pac.RESETS,
-        &pac.CLOCKS,
-    );
+    // let mut i2c = I2C::i2c1(
+    //     pac.I2C1,
+    //     i2c_sda,
+    //     i2c_scl,
+    //     400000,
+    //     &mut pac.RESETS,
+    //     &pac.CLOCKS,
+    // );
 
-     // Initialize the LIS3DH accelerometer
-    let mut lis3dh = Lis3dhI2C::new(&mut i2c, 0x18); // Adjust the I2C address if necessary
+    // Initialize the LIS3DH accelerometer
+    let mut lis3dh = Lis3dh::new_i2c(i2c, 0x18);
 
     // Set the accelerometer to a specific range and mode, e.g., ±2g and normal mode
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
-    lis3dh.set_full_scale(lis3dh::FullScale::G2).unwrap();
 
     let mut x = 0;
     let mut y = 0;
