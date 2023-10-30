@@ -124,17 +124,17 @@ fn main() -> ! {
     // Initialize I2C
     let i2c_sda = pins.sda.into_mode();
     let i2c_scl = pins.scl.into_mode();
-    // let mut i2c = I2C::i2c1(
-    //     pac.I2C1,
-    //     i2c_sda,
-    //     i2c_scl,
-    //     400000,
-    //     &mut pac.RESETS,
-    //     &pac.CLOCKS,
-    // );
+    let mut i2c = I2C::i2c1(
+        pac.I2C1,
+        i2c_sda,
+        i2c_scl,
+        400000,
+        &mut pac.RESETS,
+        &pac.CLOCKS,
+    );
 
     // Initialize the LIS3DH accelerometer
-    let mut lis3dh = Lis3dh::new_i2c(i2c, 0x18)
+    let mut lis3dh = Lis3dh::new_i2c(i2c, 0x18);
 
     // Set the accelerometer to a specific range and mode, e.g., ±2g and normal mode
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
@@ -184,19 +184,4 @@ fn main() -> ! {
         nticks += 1;
         delay_timer.delay_ms(5 as u32);
     }
-
-    /*
-    // Old Loop Section
-    let mut blinky_led_pin = pins.d13.into_push_pull_output();
-    let delay: u32 = 500; // loop delay in ms
-    let mut n: u32 = 0;
-    loop {
-        write!(usb, "starting loop number {:?}\r\n", n).unwrap();
-        blinky_led_pin.set_low().unwrap();
-        delay_timer.delay_ms(delay as u32);
-        blinky_led_pin.set_high().unwrap();
-        delay_timer.delay_ms(delay as u32);
-        n = n + 1;
-    }
-    */
 }
