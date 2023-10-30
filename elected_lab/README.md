@@ -1,1 +1,2 @@
 This project contains code for an orientation based animated display in embedded rust for the Adafruit Feather RP2040. The code also includes serial printing of the relevant accelerometer values and each time the display is updated for debugging. To build the application run "cargo run" in this directory, then flash the elected_lab.uf2 file created at home\wsl\CEN3907\elected_lab\target\thumbv6m-none-eabi\debug to the board over USB
+(working in WSL necessitates it's done manually)
