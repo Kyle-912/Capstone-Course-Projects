@@ -142,32 +142,30 @@ impl Strobe {
 pub struct Wave {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
+    delta: bool,
     row: usize,
+    col: usize,
 }
 
 impl Wave {
     pub fn new(color: RGB8) -> Wave {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
-            color,
+            color: color,
+            delta: true,
             row: 0,
+            col: 0,
         }
     }
 
     pub fn set(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
+        for px in self.strip.iter_mut() {
             let brightness = if self.row == 1 { 255 } else { 128 }; // Full brightness for middle row, half brightness for outer rows
             *px = RGB8::new(
-                (self.color.r as u16 * brightness as u16 / 255) as u8,
+                self.color.r,
                 (self.color.g as u16 * brightness as u16 / 255) as u8,
                 (self.color.b as u16 * brightness as u16 / 255) as u8,
             );
-        }
-    }
-
-    pub fn clear(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
-            *px = RGB8::new(0, 0, 0); // Clear the entire board
         }
     }
 
@@ -176,8 +174,19 @@ impl Wave {
     }
 
     pub fn next(&mut self) {
-        self.clear(); // Clear the entire board
-        self.set(); // Set the new wave
-        self.row = (self.row + 1) % 3; // Move to the next row
+        if self.row == 2 {
+            self.delta = false;
+            self.col = (self.col + 1) % 8;
+        } else if self.row == 0 {
+            self.delta = true;
+            self.col = (self.col + 1) % 8;
+        }
+
+        if self.delta {
+            self.row += 1;
+        } else {
+            self.row -= 1;
+        }
+        self.set();
     }
 }
