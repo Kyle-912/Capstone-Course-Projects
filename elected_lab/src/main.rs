@@ -148,7 +148,7 @@ fn main() -> ! {
     let mut delay_timer =
         cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
-    // Define modes TODO: add other 2
+    // Define modes
     let mut pulse = Pulse::new(RGB8::new(255, 0, 0));
     let mut snake = Snake::new(RGB8::new(0, 255, 0));
     let mut flash = Flash::new(RGB8::new(255, 255, 255));
@@ -168,6 +168,8 @@ fn main() -> ! {
             nticks = 0;
             pulse.next(); //TODO: add other 2
             snake.next();
+            flash.next();
+            wave.next();
 
             let ds: [RGB8; animations::NUM_PX] = match mode {
                 0 => pulse.to_list(),
