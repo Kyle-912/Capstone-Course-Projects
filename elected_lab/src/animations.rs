@@ -105,6 +105,7 @@ impl Snake {
 pub struct Flash {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
+    toggle: bool,
 }
 
 impl Flash {
@@ -112,6 +113,7 @@ impl Flash {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
             color: color,
+            toggle: true,
         }
     }
 
