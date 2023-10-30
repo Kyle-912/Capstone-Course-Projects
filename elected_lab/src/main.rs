@@ -64,7 +64,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{Strobe, Pulse, Snake, Wave};
+use animations::{Pulse, Snake, Strobe, Wave};
 
 #[entry]
 fn main() -> ! {
