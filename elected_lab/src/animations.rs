@@ -159,7 +159,7 @@ impl Wave {
     }
 
         pub fn set(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
+        for px in self.strip.iter_mut() {
             if self.row == 1 {
                 let brightness = 255; // Full brightness for middle row
                 *px = RGB8::new(
@@ -179,7 +179,7 @@ impl Wave {
     }
 
     pub fn clear_rows(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
+        for px in self.strip.iter_mut() {
             if self.row != 1 {
                 *px = RGB8::new(0, 0, 0); // Clear rows that are not part of the wave
             }
