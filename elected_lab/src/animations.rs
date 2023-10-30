@@ -105,9 +105,6 @@ impl Snake {
 pub struct Flash {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
-    delta: bool,
-    row: usize,
-    col: usize,
 }
 
 impl Flash {
@@ -115,9 +112,12 @@ impl Flash {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
             color: color,
-            delta: true,
-            row: 0,
-            col: 0,
+        }
+    }
+
+    pub fn set(&mut self) {
+        for (idx, px) in self.strip.iter_mut().enumerate() {
+            *px = self.color;
         }
     }
 
@@ -126,19 +126,7 @@ impl Flash {
     }
 
     pub fn next(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
-            if idx == self.col * WIDTH + self.row {
-                if px == &self.color {
-                    *px = RGB8::new(0, 0, 0); // Toggle off
-                } else {
-                    *px = self.color; // Toggle on
-                }
-            } else {
-                *px = RGB8::new(0, 0, 0); // Turn off other pixels
-            }
-        }
-
-        self.col = (self.col + 1) % 8; // Move to the next column
+        self.set();
     }
 }
 
