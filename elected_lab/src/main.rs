@@ -174,8 +174,8 @@ fn main() -> ! {
             let ds: [RGB8; animations::NUM_PX] = match mode {
                 0 => pulse.to_list(),
                 1 => snake.to_list(),
-                // 2 => flash.to_list(),
-                // 3 => TODO:.to_list(),
+                2 => flash.to_list(),
+                3 => wave.to_list(),
                 _ => [RGB8::new(0, 0, 0); animations::NUM_PX],
             };
 
