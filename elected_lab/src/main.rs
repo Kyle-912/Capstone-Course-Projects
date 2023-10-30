@@ -153,7 +153,7 @@ fn main() -> ! {
     let mut flash = Strobe::new(RGB8::new(255, 255, 255));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
-    let mut mode: u8 = 2;
+    let mut mode: u8 = 3;
     let mut nticks: u8 = 5; // Loop delay is ms
     loop {
         x = accel.x as i32;
