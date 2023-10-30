@@ -150,7 +150,7 @@ fn main() -> ! {
     // Define modes
     let mut pulse = Pulse::new(RGB8::new(255, 0, 0));
     let mut snake = Snake::new(RGB8::new(0, 255, 0));
-    let mut flash = Strobe::new(RGB8::new(255, 255, 255));
+    let mut flash = Strobe::new(RGB8::new(255, 0, 0));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
     let mut nticks: u8 = 5; // Loop delay is ms
