@@ -121,7 +121,7 @@ impl Flash {
         }
     }
 
-    pub fn set(&mut self) {
+        pub fn set(&mut self) {
         for (idx, px) in self.strip.iter_mut().enumerate() {
             if idx == self.col * WIDTH + self.row {
                 *px = self.color;
@@ -136,19 +136,19 @@ impl Flash {
     }
 
     pub fn next(&mut self) {
-        if self.row == WIDTH - 1 {
-            self.delta = false;
-            self.col = (self.col + 1) % 8;
-        } else if self.row == 0 {
-            self.delta = true;
-            self.col = (self.col + 1) % 8;
+        for (idx, px) in self.strip.iter_mut().enumerate() {
+            if idx == self.col * WIDTH + self.row {
+                if px == &self.color {
+                    *px = RGB8::new(0, 0, 0); // Toggle off
+                } else {
+                    *px = self.color; // Toggle on
+                }
+            } else {
+                *px = RGB8::new(0, 0, 0); // Turn off other pixels
+            }
         }
-        if self.delta {
-            self.row += 1;
-        } else {
-            self.row -= 1;
-        }
-        self.set();
+
+        self.col = (self.col + 1) % 8; // Move to the next column
     }
 }
 
