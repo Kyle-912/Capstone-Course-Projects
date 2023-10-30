@@ -20,12 +20,6 @@ impl Pulse {
         }
     }
 
-    // pub fn clear(&mut self) {
-    //     for px in self.strip.iter_mut() {
-    //         *px = RGB8::new(0, 0, 0);
-    //     }
-    // }
-
     pub fn set(&mut self, color: RGB8) {
         for px in self.strip.iter_mut() {
             *px = color;
