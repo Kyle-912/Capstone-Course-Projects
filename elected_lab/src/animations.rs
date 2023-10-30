@@ -142,29 +142,27 @@ impl Strobe {
 pub struct Wave {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
-    delta: bool,
-    row: usize,
-    col: usize,
+    row: usize, // Remove the `delta` and `col` fields
 }
 
 impl Wave {
     pub fn new(color: RGB8) -> Wave {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
-            color: color,
-            delta: true,
+            color,
             row: 0,
-            col: 0,
         }
     }
 
     pub fn set(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
-            if idx == self.col * WIDTH + self.row {
-                *px = self.color;
-            } else {
-                *px = RGB8::new(0, 0, 0);
-            }
+        for idx in self.row * WIDTH..(self.row + 1) * WIDTH {
+            self.strip[idx] = self.color;
+        }
+    }
+
+    pub fn clear(&mut self) {
+        for idx in 0..WIDTH * HEIGHT {
+            self.strip[idx] = RGB8::new(0, 0, 0); // Clear the entire board
         }
     }
 
@@ -173,18 +171,9 @@ impl Wave {
     }
 
     pub fn next(&mut self) {
-        if self.row == WIDTH - 1 {
-            self.delta = false;
-            self.col = (self.col + 1) % 8;
-        } else if self.row == 0 {
-            self.delta = true;
-            self.col = (self.col + 1) % 8;
-        }
-        if self.delta {
-            self.row += 1;
-        } else {
-            self.row -= 1;
-        }
-        self.set();
+        self.clear(); // Clear the entire board
+        self.set(); // Set the current row
+        self.row = (self.row + 1) % HEIGHT; // Move to the next row
     }
 }
+
