@@ -153,28 +153,28 @@ fn main() -> ! {
     let mut flash = Strobe::new(RGB8::new(255, 255, 255));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
-    let mut mode: u8 = 3;
+    let mut mode: u8;
     let mut nticks: u8 = 5; // Loop delay is ms
     loop {
-        x = accel.x as i32;
-        y = accel.y as i32;
-
-        if x.abs() > y.abs() {
-            if x > 0 {
-                mode = 0; // +x
-            } else {
-                mode = 2; // -x
-            }
-        } else {
-            if y > 0 {
-                mode = 1; // +y
-            } else {
-                mode = 3; // -y
-            }
-        }
-
         if nticks > 4 {
             nticks = 0;
+
+            x = accel.x as i32;
+            y = accel.y as i32;
+
+            if x.abs() > y.abs() {
+                if x > 0 {
+                    mode = 0; // +x
+                } else {
+                    mode = 2; // -x
+                }
+            } else {
+                if y > 0 {
+                    mode = 1; // +y
+                } else {
+                    mode = 3; // -y
+                }
+            }
 
             write!(usb, "X: {}, Y: {}\r\n", x, y).unwrap();
             write!(usb, "Updating display...\r\n").unwrap();
