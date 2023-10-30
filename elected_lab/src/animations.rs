@@ -142,19 +142,15 @@ impl Strobe {
 pub struct Wave {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
-    delta: bool,
     row: usize,
-    col: usize,
 }
 
 impl Wave {
     pub fn new(color: RGB8) -> Wave {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
-            color: color,
-            delta: true,
+            color,
             row: 0,
-            col: 0,
         }
     }
 
