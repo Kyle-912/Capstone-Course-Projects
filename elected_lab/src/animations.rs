@@ -171,9 +171,9 @@ impl Wave {
     }
 
     pub fn next(&mut self) {
-        self.clear(); // Clear the entire board
-        self.set(); // Set the current row
-        self.row = (self.row + 1) % HEIGHT; // Move to the next row
+        self.clear();
+        self.set();
+        self.row = (self.row + 1) % HEIGHT;
     }
 }
 
