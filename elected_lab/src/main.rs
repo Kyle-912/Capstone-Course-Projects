@@ -138,7 +138,6 @@ fn main() -> ! {
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
     let mut x;
     let mut y;
-    let mut z;
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
@@ -153,15 +152,29 @@ fn main() -> ! {
     let mut flash = Flash::new(RGB8::new(255, 255, 255));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
-    let mut mode: u8 = 0; //TODO: will later be set by accel values
+    let mut mode: u8; //TODO: will later be set by accel values
     let mut nticks: u8 = 5; // Loop delay is ms
     loop {
         let accel = lis3dh.accel_raw().unwrap();
         x = accel.x as i32;
         y = accel.y as i32;
-        z = accel.z as i32;
+
+        if x.abs() > y.abs() {
+            if x > 0 {
+                mode = 0; // +x
+            } else {
+                mode = 2; // -x
+            }
+        } else {
+            if y > 0 {
+                mode = 1; // +y
+            } else {
+                mode = 3; // -y
+            }
+        }
+
         if nticks > 4 {
-            write!(usb, "X: {}, Y: {}, Z: {}\r\n", x, y, z).unwrap();
+            write!(usb, "X: {}, Y: {}\r\n", x, y).unwrap();
             write!(usb, "Updating display...\r\n").unwrap();
             nticks = 0;
             pulse.next();
