@@ -125,7 +125,7 @@ fn main() -> ! {
     // Initialize I2C
     let i2c_sda = pins.sda.into_mode();
     let i2c_scl = pins.scl.into_mode();
-    let mut i2c = I2C::i2c1(
+    let i2c = I2C::i2c1(
         pac.I2C1,
         i2c_sda,
         i2c_scl,
