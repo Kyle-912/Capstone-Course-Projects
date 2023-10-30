@@ -128,9 +128,6 @@ fn main() -> ! {
     // Initialize the LIS3DH accelerometer
     let mut lis3dh = Lis3dh::new_i2c(i2c, lis3dh::SlaveAddr::Default).unwrap();
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
-    let accel = lis3dh.accel_raw().unwrap();
-    // let mut x;
-    // let mut y;
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
@@ -154,7 +151,7 @@ fn main() -> ! {
             let x = accel.x as i32;
             let y = accel.y as i32;
 
-            let mut mode: u8;
+            let mode: u8;
 
             if x.abs() > y.abs() {
                 if x > 0 {
