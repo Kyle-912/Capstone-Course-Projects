@@ -4,7 +4,6 @@
 /**** low-level imports *****/
 use core::fmt::Write as SerialWrite;
 use core::panic::PanicInfo;
-use adafruit_feather_rp2040::pac::I2C1;
 // use panic_halt as _;
 use cortex_m::prelude::*;
 use cortex_m_rt::entry;
@@ -14,7 +13,7 @@ use embedded_hal::{
     spi,
     timer::CountDown,
 };
-use embedded_time::rate::*;
+// use embedded_time::rate::*;
 
 /***** board-specific imports *****/
 use adafruit_feather_rp2040::hal;
@@ -36,8 +35,10 @@ use adafruit_feather_rp2040::{
 /**** imports for external devices *****/
 use fugit::{ExtU32, RateExtU32};
 use lis3dh::{Lis3dh, Lis3dhI2C};
+use lis3dh::accelerometer::RawAccelerometer;
 use smart_leds::{SmartLedsWrite, RGB8};
 use ws2812_pio::Ws2812;
+
 
 // USB Device support
 use usb_device::class_prelude::*;
@@ -128,13 +129,13 @@ fn main() -> ! {
         pac.I2C1,
         i2c_sda,
         i2c_scl,
-        400000,
+        400.kHz(),
         &mut pac.RESETS,
-        &pac.CLOCKS,
+        &clocks.system_clock,
     );
 
     // Initialize the LIS3DH accelerometer
-    let mut lis3dh = Lis3dh::new_i2c(i2c, 0x18);
+    let mut lis3dh = Lis3dh::new_i2c(i2c, lis3dh::SlaveAddr::Default).unwrap();
 
     // Set the accelerometer to a specific range and mode, e.g., ±2g and normal mode
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
@@ -156,14 +157,11 @@ fn main() -> ! {
 
     let mut mode: u8 = 0; //TODO: will later be set by accel values
     let mut nticks: u8 = 5; // Loop delay is ms
-
     loop {
-        if lis3dh.accel_status().unwrap() {
             let accel = lis3dh.accel_raw().unwrap();
             x = accel.x as i32;
             y = accel.y as i32;
             z = accel.z as i32;
-        }
         if nticks > 4 {
             write!(usb, "X: {}, Y: {}, Z: {}\r\n", x, y, z).unwrap();
             write!(usb, "Updating display...\r\n").unwrap();
