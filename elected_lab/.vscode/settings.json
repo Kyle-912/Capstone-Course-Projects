@@ -5,9 +5,11 @@
         "REGS",
         "XOSC",
         "blinky",
+        "eabi",
         "leds",
         "nticks",
         "plls",
+        "thumbv",
         "uart",
         "usbd"
     ]
