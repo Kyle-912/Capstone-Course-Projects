@@ -159,7 +159,7 @@ impl Wave {
     }
 
     pub fn set(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
+        for px in self.strip.iter_mut() {
             let brightness = if self.row == 1 { 255 } else { 128 }; // Full brightness for middle row, half brightness for outer rows
             *px = RGB8::new(
                 self.color.r,
