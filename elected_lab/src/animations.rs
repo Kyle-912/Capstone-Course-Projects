@@ -118,11 +118,12 @@ impl Flash {
     }
 
     pub fn set(&mut self) {
-        for px in self.strip.iter_mut() {
-            *px = self.color;
+        if self.toggle {
+            for px in self.strip.iter_mut() {
+                *px = self.color;
+            }
         }
     }
-
 
     pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
         self.strip
@@ -182,5 +183,3 @@ impl Wave {
         self.set();
     }
 }
-
-
