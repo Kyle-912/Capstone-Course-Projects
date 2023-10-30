@@ -6,4 +6,4 @@ This repo contains a simple blinky-led example in embedded rust for the Adafruit
 ### Acknowledgements
 Most of this code is adapted from [this](https://github.com/eterevsky/rp2040-blink/blob/main/README.md) repository -- thanks!
 
-This project contains code for an orientation based animated display in embedded rust for the Adafruit Feather RP2040. The code also includes serial printing of the relevant accelerometer values and each time the display is updated for debugging. To 
+This project contains code for an orientation based animated display in embedded rust for the Adafruit Feather RP2040. The code also includes serial printing of the relevant accelerometer values and each time the display is updated for debugging. To build the appl
