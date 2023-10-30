@@ -174,9 +174,9 @@ fn main() -> ! {
         }
 
         if nticks > 4 {
+            nticks = 0;
             write!(usb, "X: {}, Y: {}\r\n", x, y).unwrap();
             write!(usb, "Updating display...\r\n").unwrap();
-            nticks = 0;
             pulse.next();
             snake.next();
             flash.next();
