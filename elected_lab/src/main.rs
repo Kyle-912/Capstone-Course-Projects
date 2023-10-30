@@ -152,7 +152,7 @@ fn main() -> ! {
     let mut flash = Flash::new(RGB8::new(255, 255, 255));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
-    let mut mode: u8; //TODO: will later be set by accel values
+    let mut mode: u8;
     let mut nticks: u8 = 5; // Loop delay is ms
     loop {
         let accel = lis3dh.accel_raw().unwrap();
