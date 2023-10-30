@@ -64,7 +64,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{Flash, Pulse, Snake, Wave};
+use animations::{Strobe, Pulse, Snake, Wave};
 
 #[entry]
 fn main() -> ! {
@@ -150,7 +150,7 @@ fn main() -> ! {
     // Define modes
     let mut pulse = Pulse::new(RGB8::new(255, 0, 0));
     let mut snake = Snake::new(RGB8::new(0, 255, 0));
-    let mut flash = Flash::new(RGB8::new(255, 255, 255));
+    let mut flash = Strobe::new(RGB8::new(255, 255, 255));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
     let mut mode: u8 = 2;

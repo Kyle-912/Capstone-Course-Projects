@@ -102,14 +102,14 @@ impl Snake {
     }
 }
 
-pub struct Flash {
+pub struct Strobe {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
     toggle: bool,
 }
 
-impl Flash {
-    pub fn new(color: RGB8) -> Flash {
+impl Strobe {
+    pub fn new(color: RGB8) -> Strobe {
         Self {
             strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
             color: color,
