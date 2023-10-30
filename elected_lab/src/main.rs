@@ -5,9 +5,7 @@
 use core::fmt::Write as SerialWrite;
 use core::panic::PanicInfo;
 // use panic_halt as _;
-use cortex_m::prelude::*;
 use cortex_m_rt::entry;
-use embedded_hal::blocking::i2c::{Read, Write};
 use embedded_hal::{
     digital::v2::{InputPin, OutputPin},
     spi,
