@@ -140,9 +140,9 @@ fn main() -> ! {
     // Set the accelerometer to a specific range and mode, e.g., ±2g and normal mode
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
 
-    let mut x = 0;
-    let mut y = 0;
-    let mut z = 0;
+    let mut x;
+    let mut y;
+    let mut z;
 
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
