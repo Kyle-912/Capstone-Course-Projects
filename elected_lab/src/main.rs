@@ -4,10 +4,8 @@
 /**** low-level imports *****/
 use core::fmt::Write as SerialWrite;
 use core::panic::PanicInfo;
-// use panic_halt as _;
 use cortex_m_rt::entry;
 use embedded_hal::digital::v2::OutputPin;
-// use embedded_time::rate::*;
 
 /***** board-specific imports *****/
 use adafruit_feather_rp2040::hal;
