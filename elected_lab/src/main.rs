@@ -25,7 +25,7 @@ use adafruit_feather_rp2040::{
 };
 
 /**** imports for external devices *****/
-use fugit::{RateExtU32};
+use fugit::RateExtU32;
 use lis3dh::accelerometer::RawAccelerometer;
 use lis3dh::{Lis3dh, Lis3dhI2C};
 use smart_leds::{SmartLedsWrite, RGB8};
