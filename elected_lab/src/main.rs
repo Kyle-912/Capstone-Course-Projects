@@ -14,12 +14,10 @@ use adafruit_feather_rp2040::hal;
 use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
-        gpio::{FunctionI2C, FunctionSpi, FunctionUart},
         pac,
         pac::interrupt,
         pio::PIOExt,
         timer::Timer,
-        uart,
         watchdog::Watchdog,
         Sio, I2C,
     },
@@ -27,7 +25,7 @@ use adafruit_feather_rp2040::{
 };
 
 /**** imports for external devices *****/
-use fugit::{ExtU32, RateExtU32};
+use fugit::{RateExtU32};
 use lis3dh::accelerometer::RawAccelerometer;
 use lis3dh::{Lis3dh, Lis3dhI2C};
 use smart_leds::{SmartLedsWrite, RGB8};
