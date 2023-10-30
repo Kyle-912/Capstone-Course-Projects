@@ -135,6 +135,7 @@ impl Flash {
 
     pub fn next(&mut self) {
         self.set();
+        self.toggle = !self.toggle;
     }
 }
 
