@@ -116,10 +116,11 @@ impl Flash {
     }
 
     pub fn set(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
+        for px in self.strip.iter_mut() {
             *px = self.color;
         }
     }
+
 
     pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
         self.strip
