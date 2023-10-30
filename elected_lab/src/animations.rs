@@ -142,7 +142,7 @@ impl Strobe {
 pub struct Wave {
     strip: [RGB8; WIDTH * HEIGHT],
     color: RGB8,
-    row: usize, // Remove the `delta` and `col` fields
+    row: usize,
 }
 
 impl Wave {
@@ -162,7 +162,7 @@ impl Wave {
 
     pub fn clear(&mut self) {
         for idx in 0..WIDTH * HEIGHT {
-            self.strip[idx] = RGB8::new(0, 0, 0); // Clear the entire board
+            self.strip[idx] = RGB8::new(0, 0, 0);
         }
     }
 
