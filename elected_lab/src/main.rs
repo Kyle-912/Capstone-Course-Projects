@@ -136,6 +136,7 @@ fn main() -> ! {
     // Initialize the LIS3DH accelerometer
     let mut lis3dh = Lis3dh::new_i2c(i2c, lis3dh::SlaveAddr::Default).unwrap();
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
+    let accel = lis3dh.accel_raw().unwrap();
     let mut x;
     let mut y;
 
@@ -155,7 +156,6 @@ fn main() -> ! {
     let mut mode: u8;
     let mut nticks: u8 = 5; // Loop delay is ms
     loop {
-        let accel = lis3dh.accel_raw().unwrap();
         x = accel.x as i32;
         y = accel.y as i32;
 
