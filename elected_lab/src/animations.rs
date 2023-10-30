@@ -160,11 +160,12 @@ impl Wave {
 
     pub fn set(&mut self) {
         for (idx, px) in self.strip.iter_mut().enumerate() {
-            if idx == self.col * WIDTH + self.row {
-                *px = self.color;
-            } else {
-                *px = RGB8::new(0, 0, 0);
-            }
+            let brightness = if self.row == 1 { 255 } else { 128 }; // Full brightness for middle row, half brightness for outer rows
+            *px = RGB8::new(
+                self.color.r,
+                (self.color.g as u16 * brightness as u16 / 255) as u8,
+                (self.color.b as u16 * brightness as u16 / 255) as u8,
+            );
         }
     }
 
@@ -173,13 +174,14 @@ impl Wave {
     }
 
     pub fn next(&mut self) {
-        if self.row == WIDTH - 1 {
+        if self.row == 2 {
             self.delta = false;
             self.col = (self.col + 1) % 8;
         } else if self.row == 0 {
             self.delta = true;
             self.col = (self.col + 1) % 8;
         }
+
         if self.delta {
             self.row += 1;
         } else {
