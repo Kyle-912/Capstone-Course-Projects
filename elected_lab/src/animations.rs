@@ -101,3 +101,105 @@ impl Snake {
         self.set();
     }
 }
+
+pub struct Flash {
+    strip: [RGB8; WIDTH * HEIGHT],
+    color: RGB8,
+    delta: bool,
+    row: usize,
+    col: usize,
+}
+
+impl Flash {
+    pub fn new(color: RGB8) -> Flash {
+        Self {
+            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
+            color: color,
+            delta: true,
+            row: 0,
+            col: 0,
+        }
+    }
+
+    pub fn set(&mut self) {
+        for (idx, px) in self.strip.iter_mut().enumerate() {
+            if idx == self.col * WIDTH + self.row {
+                *px = self.color;
+            } else {
+                *px = RGB8::new(0, 0, 0);
+            }
+        }
+    }
+
+    pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
+        self.strip
+    }
+
+    pub fn next(&mut self) {
+        if self.row == WIDTH - 1 {
+            self.delta = false;
+            self.col = (self.col + 1) % 8;
+        } else if self.row == 0 {
+            self.delta = true;
+            self.col = (self.col + 1) % 8;
+        }
+        if self.delta {
+            self.row += 1;
+        } else {
+            self.row -= 1;
+        }
+        self.set();
+    }
+}
+
+pub struct Wave {
+    strip: [RGB8; WIDTH * HEIGHT],
+    color: RGB8,
+    delta: bool,
+    row: usize,
+    col: usize,
+}
+
+impl Wave {
+    pub fn new(color: RGB8) -> Wave {
+        Self {
+            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
+            color: color,
+            delta: true,
+            row: 0,
+            col: 0,
+        }
+    }
+
+    pub fn set(&mut self) {
+        for (idx, px) in self.strip.iter_mut().enumerate() {
+            if idx == self.col * WIDTH + self.row {
+                *px = self.color;
+            } else {
+                *px = RGB8::new(0, 0, 0);
+            }
+        }
+    }
+
+    pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
+        self.strip
+    }
+
+    pub fn next(&mut self) {
+        if self.row == WIDTH - 1 {
+            self.delta = false;
+            self.col = (self.col + 1) % 8;
+        } else if self.row == 0 {
+            self.delta = true;
+            self.col = (self.col + 1) % 8;
+        }
+        if self.delta {
+            self.row += 1;
+        } else {
+            self.row -= 1;
+        }
+        self.set();
+    }
+}
+
+
