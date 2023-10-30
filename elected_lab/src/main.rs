@@ -149,7 +149,7 @@ fn main() -> ! {
         cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
     // Define modes TODO: add other 2
-    let mut pulse = Pulse::new(RGB8::new(50, 0, 50));
+    let mut pulse = Pulse::new(RGB8::new(255, 0, 0));
     let mut snake = Snake::new(RGB8::new(0, 255, 0));
     let mut flash = Flash::new(RGB8::new(255, 255, 255));
     let mut wave = Wave::new(RGB8::new(0, 0, 255));
