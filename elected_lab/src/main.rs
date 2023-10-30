@@ -159,19 +159,19 @@ fn main() -> ! {
         x = accel.x as i32;
         y = accel.y as i32;
 
-        // if x.abs() > y.abs() {
-        //     if x > 0 {
-        //         mode = 0; // +x
-        //     } else {
-        //         mode = 2; // -x
-        //     }
-        // } else {
-        //     if y > 0 {
-        //         mode = 1; // +y
-        //     } else {
-        //         mode = 3; // -y
-        //     }
-        // }
+        if x.abs() > y.abs() {
+            if x > 0 {
+                mode = 0; // +x
+            } else {
+                mode = 2; // -x
+            }
+        } else {
+            if y > 0 {
+                mode = 1; // +y
+            } else {
+                mode = 3; // -y
+            }
+        }
 
         if nticks > 4 {
             nticks = 0;
