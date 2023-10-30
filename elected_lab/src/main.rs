@@ -136,10 +136,7 @@ fn main() -> ! {
 
     // Initialize the LIS3DH accelerometer
     let mut lis3dh = Lis3dh::new_i2c(i2c, lis3dh::SlaveAddr::Default).unwrap();
-
-    // Set the accelerometer to a specific range and mode, e.g., ±2g and normal mode
     lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
-
     let mut x;
     let mut y;
     let mut z;
