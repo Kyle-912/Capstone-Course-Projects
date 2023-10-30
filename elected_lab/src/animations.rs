@@ -121,16 +121,6 @@ impl Flash {
         }
     }
 
-        pub fn set(&mut self) {
-        for (idx, px) in self.strip.iter_mut().enumerate() {
-            if idx == self.col * WIDTH + self.row {
-                *px = self.color;
-            } else {
-                *px = RGB8::new(0, 0, 0);
-            }
-        }
-    }
-
     pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
         self.strip
     }
