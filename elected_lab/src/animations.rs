@@ -123,7 +123,9 @@ impl Flash {
                 *px = self.color;
             }
         } else {
-            
+            for px in self.strip.iter_mut() {
+                *px = RGB8::new(0, 0, 0);
+            }
         }
     }
 
