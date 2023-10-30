@@ -122,6 +122,8 @@ impl Flash {
             for px in self.strip.iter_mut() {
                 *px = self.color;
             }
+        } else {
+            
         }
     }
 
