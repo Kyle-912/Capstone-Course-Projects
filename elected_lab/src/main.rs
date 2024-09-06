@@ -2,29 +2,20 @@
 #![no_main]
 
 /**** low-level imports *****/
-use core::fmt::Write;
+use core::fmt::Write as SerialWrite;
 use core::panic::PanicInfo;
-// use panic_halt as _;
-use cortex_m::prelude::*;
 use cortex_m_rt::entry;
-use embedded_hal::{
-    digital::v2::{InputPin, OutputPin},
-    spi,
-    timer::CountDown,
-};
-use embedded_time::rate::*;
+use embedded_hal::digital::v2::OutputPin;
 
 /***** board-specific imports *****/
 use adafruit_feather_rp2040::hal;
 use adafruit_feather_rp2040::{
     hal::{
         clocks::{init_clocks_and_plls, Clock},
-        gpio::{FunctionI2C, FunctionSpi, FunctionUart},
         pac,
         pac::interrupt,
         pio::PIOExt,
         timer::Timer,
-        uart,
         watchdog::Watchdog,
         Sio, I2C,
     },
@@ -32,7 +23,9 @@ use adafruit_feather_rp2040::{
 };
 
 /**** imports for external devices *****/
-use fugit::{ExtU32, RateExtU32};
+use fugit::RateExtU32;
+use lis3dh::accelerometer::RawAccelerometer;
+use lis3dh::Lis3dh;
 use smart_leds::{SmartLedsWrite, RGB8};
 use ws2812_pio::Ws2812;
 
@@ -61,7 +54,7 @@ fn panic(panic_info: &PanicInfo) -> ! {
 }
 
 mod animations;
-use animations::{Pulse, Snake}; //TODO: add other 2
+use animations::{Pulse, Snake, Strobe, Wave};
 
 #[entry]
 fn main() -> ! {
@@ -118,6 +111,22 @@ fn main() -> ! {
         timer.count_down(),
     );
 
+    // Initialize I2C
+    let i2c_sda = pins.sda.into_mode();
+    let i2c_scl = pins.scl.into_mode();
+    let i2c = I2C::i2c1(
+        pac.I2C1,
+        i2c_sda,
+        i2c_scl,
+        400.kHz(),
+        &mut pac.RESETS,
+        &clocks.system_clock,
+    );
+
+    // Initialize the LIS3DH accelerometer
+    let mut lis3dh = Lis3dh::new_i2c(i2c, lis3dh::SlaveAddr::Default).unwrap();
+    lis3dh.set_mode(lis3dh::Mode::Normal).unwrap();
+
     // Setup the Propmaker Power Enable pin
     let mut pwr_pin = pins.d10.into_push_pull_output();
     pwr_pin.set_high().unwrap();
@@ -125,25 +134,50 @@ fn main() -> ! {
     let mut delay_timer =
         cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
 
-    // Define modes TODO: add other 2
-    let mut pulse = Pulse::new(RGB8::new(50, 0, 50));
-    let mut snake = Snake::new(RGB8::new(255, 255, 255));
+    // Define modes
+    let mut pulse = Pulse::new(RGB8::new(255, 255, 255));
+    let mut snake = Snake::new(RGB8::new(0, 255, 0));
+    let mut flash = Strobe::new(RGB8::new(255, 0, 0));
+    let mut wave = Wave::new(RGB8::new(0, 0, 255));
 
-    let mut mode: u8 = 0; //TODO: will later be set by accel values
     let mut nticks: u8 = 5; // Loop delay is ms
-
     loop {
         if nticks > 4 {
-            write!(usb, "Updating display...\r\n").unwrap();
             nticks = 0;
-            pulse.next(); //TODO: add other 2
+
+            let accel = lis3dh.accel_raw().unwrap();
+            let x = accel.x as i32;
+            let y = accel.y as i32;
+
+            let mode: u8;
+
+            if x.abs() > y.abs() {
+                if x > 0 {
+                    mode = 0; // +x
+                } else {
+                    mode = 2; // -x
+                }
+            } else {
+                if y > 0 {
+                    mode = 1; // +y
+                } else {
+                    mode = 3; // -y
+                }
+            }
+
+            write!(usb, "X: {}, Y: {}\r\n", x, y).unwrap();
+            write!(usb, "Updating display...\r\n").unwrap();
+
+            pulse.next();
             snake.next();
+            flash.next();
+            wave.next();
 
             let ds: [RGB8; animations::NUM_PX] = match mode {
                 0 => pulse.to_list(),
                 1 => snake.to_list(),
-                // 2 => TODO:.to_list(),
-                // 3 => TODO:.to_list(),
+                2 => flash.to_list(),
+                3 => wave.to_list(),
                 _ => [RGB8::new(0, 0, 0); animations::NUM_PX],
             };
 
@@ -152,19 +186,4 @@ fn main() -> ! {
         nticks += 1;
         delay_timer.delay_ms(5 as u32);
     }
-
-    /*
-    // Old Loop Section
-    let mut blinky_led_pin = pins.d13.into_push_pull_output();
-    let delay: u32 = 500; // loop delay in ms
-    let mut n: u32 = 0;
-    loop {
-        write!(usb, "starting loop number {:?}\r\n", n).unwrap();
-        blinky_led_pin.set_low().unwrap();
-        delay_timer.delay_ms(delay as u32);
-        blinky_led_pin.set_high().unwrap();
-        delay_timer.delay_ms(delay as u32);
-        n = n + 1;
-    }
-    */
 }

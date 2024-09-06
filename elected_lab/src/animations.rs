@@ -5,7 +5,6 @@ pub const NUM_PX: usize = WIDTH * HEIGHT;
 
 pub struct Pulse {
     strip: [RGB8; WIDTH * HEIGHT],
-    // color: RGB8,
     px_counter: u8,
     descending: bool,
 }
@@ -14,17 +13,10 @@ impl Pulse {
     pub fn new(color: RGB8) -> Pulse {
         Self {
             strip: [color; WIDTH * HEIGHT],
-            // color: color,
             px_counter: 0,
             descending: false,
         }
     }
-
-    // pub fn clear(&mut self) {
-    //     for px in self.strip.iter_mut() {
-    //         *px = RGB8::new(0, 0, 0);
-    //     }
-    // }
 
     pub fn set(&mut self, color: RGB8) {
         for px in self.strip.iter_mut() {
@@ -101,3 +93,79 @@ impl Snake {
         self.set();
     }
 }
+
+pub struct Strobe {
+    strip: [RGB8; WIDTH * HEIGHT],
+    color: RGB8,
+    toggle: bool,
+}
+
+impl Strobe {
+    pub fn new(color: RGB8) -> Strobe {
+        Self {
+            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
+            color: color,
+            toggle: true,
+        }
+    }
+
+    pub fn set(&mut self) {
+        if self.toggle {
+            for px in self.strip.iter_mut() {
+                *px = self.color;
+            }
+        } else {
+            for px in self.strip.iter_mut() {
+                *px = RGB8::new(0, 0, 0);
+            }
+        }
+    }
+
+    pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
+        self.strip
+    }
+
+    pub fn next(&mut self) {
+        self.set();
+        self.toggle = !self.toggle;
+    }
+}
+
+pub struct Wave {
+    strip: [RGB8; WIDTH * HEIGHT],
+    color: RGB8,
+    row: usize,
+}
+
+impl Wave {
+    pub fn new(color: RGB8) -> Wave {
+        Self {
+            strip: [RGB8::new(0, 0, 0); WIDTH * HEIGHT],
+            color,
+            row: 0,
+        }
+    }
+
+    pub fn set(&mut self) {
+        for idx in self.row * WIDTH..(self.row + 1) * WIDTH {
+            self.strip[idx] = self.color;
+        }
+    }
+
+    pub fn clear(&mut self) {
+        for idx in 0..WIDTH * HEIGHT {
+            self.strip[idx] = RGB8::new(0, 0, 0);
+        }
+    }
+
+    pub fn to_list(&self) -> [RGB8; WIDTH * HEIGHT] {
+        self.strip
+    }
+
+    pub fn next(&mut self) {
+        self.clear();
+        self.set();
+        self.row = (self.row + 1) % HEIGHT;
+    }
+}
+
